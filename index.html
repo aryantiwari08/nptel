@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Course Certificate</title>
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .certificate-btn {
+      background-color: #337ab7;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .certificate-btn:hover {
+      background-color: #286090;
+    }
+
+    .error {
+      color: red;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <a href="#" id="certificateBtn" class="certificate-btn" target="_blank">Course Certificate</a>
+    <div id="error" class="error" style="display: none;">Invalid certificate ID in URL.</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const certificateId = params.get("q");
+
+    const links = {
+      "NPTEL24MG102S852805904": "https://internalapp.nptel.ac.in/NOC/NOC24/SEM2/Ecertificates/102/noc24-hs64/Course/NPTEL24MG102S852805904.pdf",
+      "NPTEL25MG08S349900096046767653": "https://internalapp.nptel.ac.in/NOC/NOC25/SEM1/Ecertificates/110/noc25-mg08/Course/NPTEL25MG08S349900096046767653.pdf"
+    };
+
+    const button = document.getElementById("certificateBtn");
+    const error = document.getElementById("error");
+
+    if (certificateId && links[certificateId]) {
+      button.href = links[certificateId];
+    } else {
+      button.style.display = "none";
+      error.style.display = "block";
+    }
+  </script>
+</body>
+</html>
