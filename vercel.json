@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/noc/ECertificate",
+      "permanent": true
+    }
+  ]
+}
