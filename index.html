@@ -3,27 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Course Certificate</title>
+  <title>My Certificates</title>
   <style>
     body {
-      background-color: #ffffff;
+      background-color: #f5f5f5;
       font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      text-align: center;
     }
 
     .certificate-btn {
       background-color: #337ab7;
       color: white;
-      padding: 12px 24px;
+      padding: 14px 28px;
       border: none;
       border-radius: 6px;
       font-size: 16px;
       text-decoration: none;
       cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      margin-top: 20px;
     }
 
     .certificate-btn:hover {
@@ -33,32 +36,40 @@
     .error {
       color: red;
       font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .url-text {
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <div>
-    <a href="#" id="certificateBtn" class="certificate-btn" target="_blank">Course Certificate</a>
-    <div id="error" class="error" style="display: none;">Invalid certificate ID in URL.</div>
+    <div class="url-text">Current URL: <span id="urlDisplay"></span></div>
+    <a href="#" id="certificateBtn" class="certificate-btn" target="_blank">View My Certificate</a>
+    <div id="errorMsg" class="error" style="display: none;">Invalid or missing certificate ID.</div>
   </div>
 
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const certificateId = params.get("q");
+    const certificateId = new URLSearchParams(window.location.search).get("q");
+    const certBtn = document.getElementById("certificateBtn");
+    const errorMsg = document.getElementById("errorMsg");
+    const urlDisplay = document.getElementById("urlDisplay");
+
+    urlDisplay.textContent = window.location.href;
 
     const links = {
-      "NPTEL24MG102S852805904": "https://internalapp.nptel.ac.in/NOC/NOC24/SEM2/Ecertificates/102/noc24-hs64/Course/NPTEL24MG102S852805904.pdf",
-      "NPTEL25MG08S349900096046767653": "https://internalapp.nptel.ac.in/NOC/NOC25/SEM1/Ecertificates/110/noc25-mg08/Course/NPTEL25MG08S349900096046767653.pdf"
+      "NPTEL24MG102S852805904": "./certificates/NPTEL24MG102S852805904.pdf",
+      "NPTEL25MG08S349900096046767653": "./certificates/NPTEL25MG08S349900096046767653.pdf"
     };
 
-    const button = document.getElementById("certificateBtn");
-    const error = document.getElementById("error");
-
     if (certificateId && links[certificateId]) {
-      button.href = links[certificateId];
+      certBtn.href = links[certificateId];
     } else {
-      button.style.display = "none";
-      error.style.display = "block";
+      certBtn.style.display = "none";
+      errorMsg.style.display = "block";
     }
   </script>
 </body>
